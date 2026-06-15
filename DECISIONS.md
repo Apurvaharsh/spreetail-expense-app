@@ -1,5 +1,7 @@
 # Architectural Decisions
 
+This document logs the significant technical decisions made during the development of the Spreetail Expense App, including the options considered and the rationale behind the final choices.
+
 ## Why Contributing Expenses are Approximated
 
 For the `GET /api/settlements/:id` endpoint ("Why does person A owe person B?"), we return a list of "Contributing Expenses". 
