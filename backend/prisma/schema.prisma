@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  password     String
+
+  workspace    Workspace?     @relation("UserWorkspace")
+
+  expensesPaid Expense[]      @relation("ExpensePayer")
+  shares       ExpenseShare[]
+  memberships  GroupMember[]
+  paymentsSent     Payment[]  @relation("PaymentsSent")
+  paymentsReceived Payment[]  @relation("PaymentsReceived")
+
+  createdAt    DateTime       @default(now())
+}
+
+model Workspace {
+  id            String        @id @default(cuid())
+  name          String
+  
+  ownerId       String        @unique
+  owner         User          @relation("UserWorkspace", fields: [ownerId], references: [id])
+
+  groups        Group[]
+  importBatches ImportBatch[]
+  payments      Payment[]
+
+  createdAt     DateTime      @default(now())
+}
+
+model Group {
+  id         String        @id @default(cuid())
+  name       String
+  
+  workspaceId String
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id])
+
+  members    GroupMember[]
+  expenses   Expense[]
+
+  createdAt  DateTime      @default(now())
+}
+
+model GroupMember {
+  id        String    @id @default(cuid())
+
+  groupId   String
+  userId    String
+
+  joinedAt  DateTime
+  leftAt    DateTime?
+
+  group     Group     @relation(fields: [groupId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([groupId, userId])
+}
+
+model Expense {
+  id                String         @id @default(cuid())
+
+  description       String
+
+  amount            Float
+  currency          String
+
+  convertedAmount   Float?
+  exchangeRate      Float?
+
+  date              DateTime
+
+  splitType         String
+
+  groupId           String
+  paidById          String
+
+  group             Group          @relation(fields: [groupId], references: [id])
+
+  paidBy            User           @relation("ExpensePayer", fields: [paidById], references: [id])
+
+  shares            ExpenseShare[]
+
+  createdAt         DateTime       @default(now())
+}
+
+model ExpenseShare {
+  id            String      @id @default(cuid())
+
+  expenseId     String
+  userId        String
+
+  shareAmount   Float
+  splitValue    Float?
+  notes         String?
+
+  expense       Expense     @relation(fields: [expenseId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
+}
+
+model Payment {
+  id          String     @id @default(cuid())
+
+  workspaceId String
+  workspace   Workspace  @relation(fields: [workspaceId], references: [id])
+
+  fromUserId  String
+  toUserId    String
+
+  amount      Float
+
+  createdAt   DateTime   @default(now())
+
+  fromUser    User       @relation("PaymentsSent", fields: [fromUserId], references: [id])
+  toUser      User       @relation("PaymentsReceived", fields: [toUserId], references: [id])
+}
+
+model ImportBatch {
+  id          String        @id @default(cuid())
+
+  fileName    String
+
+  workspaceId String
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id])
+
+  issues      ImportIssue[]
+
+  importedAt  DateTime      @default(now())
+}
+
+model ImportIssue {
+  id            String     @id @default(cuid())
+
+  rowNumber     Int
+
+  issueType     String
+
+  description   String
+
+  actionTaken   String
+
+  severity      String
+  
+  importBatchId String
+  batch         ImportBatch @relation(fields: [importBatchId], references: [id])
+
+  createdAt     DateTime   @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  icon      String
+  text      String
+  userId    String?
+  createdAt DateTime @default(now())
+}

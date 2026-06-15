@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tertiary: #7e3000;
+  --color-surface-container-high: #eae6f4;
+  --color-outline: #777587;
+  --color-inverse-on-surface: #f3effc;
+  --color-secondary-fixed: #d3e4fe;
+  --color-on-background: #1b1b24;
+  --color-on-primary-fixed: #0f0069;
+  --color-error: #ba1a1a;
+  --color-tertiary-fixed-dim: #ffb695;
+  --color-on-error-container: #93000a;
+  --color-background: #fcf8ff;
+  --color-inverse-surface: #302f39;
+  --color-tertiary-fixed: #ffdbcc;
+  --color-on-secondary-fixed-variant: #38485d;
+  --color-on-tertiary-container: #ffd2be;
+  --color-surface-variant: #e4e1ee;
+  --color-on-secondary-container: #54647a;
+  --color-inverse-primary: #c3c0ff;
+  --color-outline-variant: #c7c4d8;
+  --color-surface-container-low: #f5f2ff;
+  --color-surface-container: #f0ecf9;
+  --color-on-secondary: #ffffff;
+  --color-on-primary: #ffffff;
+  --color-tertiary-container: #a44100;
+  --color-surface-bright: #fcf8ff;
+  --color-on-surface: #1b1b24;
+  --color-error-container: #ffdad6;
+  --color-secondary: #505f76;
+  --color-secondary-fixed-dim: #b7c8e1;
+  --color-on-tertiary-fixed-variant: #7b2f00;
+  --color-on-surface-variant: #464555;
+  --color-on-secondary-fixed: #0b1c30;
+  --color-surface-container-lowest: #ffffff;
+  --color-primary-fixed: #e2dfff;
+  --color-primary: #3525cd;
+  --color-surface-dim: #dcd8e5;
+  --color-secondary-container: #d0e1fb;
+  --color-on-primary-container: #dad7ff;
+  --color-on-error: #ffffff;
+  --color-primary-container: #4f46e5;
+  --color-surface: #fcf8ff;
+  --color-on-tertiary-fixed: #351000;
+  --color-surface-container-highest: #e4e1ee;
+  --color-on-primary-fixed-variant: #3323cc;
+  --color-on-tertiary: #ffffff;
+  --color-surface-tint: #4d44e3;
+  --color-primary-fixed-dim: #c3c0ff;
+
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --spacing-xs: 4px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1440px;
+  --spacing-base: 4px;
+  --spacing-sm: 8px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-md: 16px;
+
+  --font-mono: "JetBrains Mono", monospace;
+  --font-headline-lg: "Inter", sans-serif;
+  --font-body-sm: "Inter", sans-serif;
+  --font-label-sm: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-headline-md: "Inter", sans-serif;
+  --font-label-md: "Inter", sans-serif;
+}
+
+@utility text-mono {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-headline-lg {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+}
+@utility text-body-sm {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+@utility text-label-sm {
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+@utility text-body-md {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+@utility text-display {
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-body-lg {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+@utility text-headline-md {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility text-label-md {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
+.card-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.input-focus:focus {
+  outline: none;
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
